@@ -12,9 +12,17 @@ namespace Unaddictive_project
 {
     public partial class Form1 : Form
     {
+        private Protection protection = new Protection();
+
         public Form1()
         {
             InitializeComponent();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            protection.generate = true;
+            protection.Reference();
         }
     }
 }
