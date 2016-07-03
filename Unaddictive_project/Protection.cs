@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Text;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Diagnostics;
 
@@ -12,6 +12,7 @@ namespace Unaddictive_project
     {
         public bool generate = false;
         public string shuffled;
+        public string encrypt;
         private char[] eChars = {'@', '!', '#', '$', '%', '&'};
         private char[] bChars = { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z' };
         private char[] sChars = { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z' };
@@ -40,13 +41,25 @@ namespace Unaddictive_project
                     {
                         sB.Append(nChars[rand.Next(0, nChars.Length)]);
                     }
-
                 }
                 shuffled = new string(sB.ToString().OrderBy(r => rand.Next()).ToArray());
-                Debug.WriteLine(sB);
                 Debug.WriteLine(shuffled);
+                Encryptor();
+                SavePassword();
             }
         }
        
+        public void Encryptor()
+        {
+             encrypt = StringEncrypter.Encrypt(shuffled, "wef");
+            Debug.WriteLine(encrypt);
+            string decrypt = StringEncrypter.Decrypt(encrypt, "wef");
+            Debug.WriteLine(decrypt);
+        }
+
+        public void SavePassword()
+        {
+            File.AppendAllText(@"c:\temp\file.txt", "oi");
+        }
     }
 }
