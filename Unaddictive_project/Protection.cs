@@ -45,27 +45,24 @@ namespace Unaddictive_project
                 }
                 shuffled = new string(sB.ToString().OrderBy(r => rand.Next()).ToArray());
                 Clipboard.SetText(shuffled);
-               /*isso e do proxy string date = DateTime.Now.ToString("g");
-                if (date == "03/07/2016 22:45")
-                {
-                    Debug.WriteLine("Vai funfar");
-                }*/
                 Encryptor();
                 SavePassword();
             }
         }
        
-        public void Encryptor()
+        private void Encryptor()
         {
             encrypt = StringEncrypter.Encrypt(shuffled, "wef");
-            Debug.WriteLine(encrypt);
-           /* string decrypt = StringEncrypter.Decrypt(encrypt, "wef");
-            Debug.WriteLine(decrypt);*/
+          //  Debug.WriteLine(encrypt);
+            string decrypt = StringEncrypter.Decrypt(encrypt, "wef");
+            Debug.WriteLine(decrypt);
+
         }
 
-        public void SavePassword()
+        private void SavePassword()
         {
-            File.AppendAllText(@"c:\temp\file.txt", encrypt);
+            Directory.CreateDirectory(@"c:\testfolder");
+            File.AppendAllText(@"c:\testfolder\passfile", encrypt);
         }
     }
 }
