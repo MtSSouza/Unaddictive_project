@@ -5,14 +5,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Diagnostics;
+using System.Windows.Forms;
 
 namespace Unaddictive_project
 {
     class Protection : AbstractReferee
     {
         public bool generate = false;
-        public string shuffled;
-        public string encrypt;
+        private string shuffled;
+        private string encrypt;
         private char[] eChars = {'@', '!', '#', '$', '%', '&'};
         private char[] bChars = { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z' };
         private char[] sChars = { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z' };
@@ -43,7 +44,12 @@ namespace Unaddictive_project
                     }
                 }
                 shuffled = new string(sB.ToString().OrderBy(r => rand.Next()).ToArray());
-                Debug.WriteLine(shuffled);
+                Clipboard.SetText(shuffled);
+               /*isso e do proxy string date = DateTime.Now.ToString("g");
+                if (date == "03/07/2016 22:45")
+                {
+                    Debug.WriteLine("Vai funfar");
+                }*/
                 Encryptor();
                 SavePassword();
             }
@@ -51,15 +57,15 @@ namespace Unaddictive_project
        
         public void Encryptor()
         {
-             encrypt = StringEncrypter.Encrypt(shuffled, "wef");
+            encrypt = StringEncrypter.Encrypt(shuffled, "wef");
             Debug.WriteLine(encrypt);
-            string decrypt = StringEncrypter.Decrypt(encrypt, "wef");
-            Debug.WriteLine(decrypt);
+           /* string decrypt = StringEncrypter.Decrypt(encrypt, "wef");
+            Debug.WriteLine(decrypt);*/
         }
 
         public void SavePassword()
         {
-            File.AppendAllText(@"c:\temp\file.txt", "oi");
+            File.AppendAllText(@"c:\temp\file.txt", encrypt);
         }
     }
 }

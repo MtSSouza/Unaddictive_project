@@ -23,7 +23,6 @@ namespace Unaddictive_project
         {
             protection.generate = true;
             protection.Reference();
-            Clipboard.SetText(protection.shuffled);
         }
     }
 }
